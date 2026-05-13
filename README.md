@@ -29,21 +29,21 @@
 
 ## The Problem
 
-You're two hours into a Claude Code session.
+🟢 Two hours in. Architecture solved. Bugs fixed. Claude knows your codebase cold.
 
-Architecture decided. Dead ends mapped. Three bugs fixed. That weird edge case in the auth flow — understood, documented in your head. Claude knows everything.
+🟡 Context hits 90%.
+&nbsp;&nbsp;&nbsp;`/compact` fires (auto or manual) — remembers decisions existed, not *why* they were made.
+&nbsp;&nbsp;&nbsp;Blurry photo of a dying session.
 
-Then context hits 90%. You `/clear`.
+&nbsp;&nbsp;&nbsp;— or —
 
-**Everything evaporates.**
+🔴 `/clear` — lose the failed approaches, hidden constraints, exact next step.
 
-The decision you made an hour ago. The three approaches you ruled out and why. The half-finished feature with the exact next step queued. The subtle constraint that would have saved you 45 minutes. Gone.
+*"Okay Claude, let me explain everything again…"*
 
-Next session: 20 minutes re-explaining what Claude already knew. Every session. Every time.
+That's **context rot** — the silent productivity tax of AI coding workflows.
 
-This is **context-rot** — the hidden tax that costs Claude Code users half their productive time. Not because the tool is broken. Because context is mortal and nothing saves it.
-
-Until now.
+`/handshake` fixes it.
 
 ---
 
@@ -55,54 +55,19 @@ Until now.
 /handshake upload   ← fully restored in 15 seconds
 ```
 
-### Before / After
+## Before `/handshake` vs. After
 
-<table>
-<tr>
-<td width="50%">
+| | Before `/handshake` | After `/handshake` |
+|---|---|---|
+| When context fills | `/compact` auto-fires — you don't choose | You snapshot when *you* decide |
+| Summarization | Auto-compressed by Claude Code | YOU control 17 explicit sections |
+| Quality | <span style="color:red">Drops decisions, reasoning, failed approaches</span> | Captures what survives |
+| Voice note | None | Always saved — past-you to future-you |
+| Failed approaches | Lost in compression | Explicit section — never re-investigated |
+| Restart time | 20 min re-explaining | 15 seconds. Exactly where you left off. |
+| Control | Auto-compaction decides | You decide |
 
-**Without claude-handshake**
-```
-Session at 95%...
-/clear
-
-New session.
-"Hey Claude, so we were
- building an auth flow,
- we tried JWT but it broke
- on token refresh because..."
-
-→ 20 minutes re-explaining.
-→ Wrong assumptions made.
-→ Context never fully recovers.
-```
-
-</td>
-<td width="50%">
-
-**With claude-handshake**
-```
-Session at 65%...
-/handshake   ← 17 sections saved
-/clear
-
-New session.
-/handshake upload
-
-"Restored from 14:23:01.
- Next: wire the token
- refresh endpoint — the
- /api/auth/refresh stub
- is ready. Ready?"
-
-→ 15 seconds. Full context.
-→ Zero re-explaining.
-→ Exactly where you left off.
-```
-
-</td>
-</tr>
-</table>
+> `/compact` is a blurry photo. `/handshake` is a briefing you wrote yourself, handed to a fresh Claude.
 
 ---
 
