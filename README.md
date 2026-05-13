@@ -73,7 +73,8 @@ That's **context rot** — the silent productivity tax of AI coding workflows.
 
 ## How It Works
 
-```
+<div align="center">
+<pre>
 ┌─────────────────────────────────────────────────────────────────┐
 │                      WORKING SESSION                            │
 │                                                                 │
@@ -86,7 +87,7 @@ That's **context rot** — the silent productivity tax of AI coding workflows.
 │            ▼                                   ▼               │
 │  Archive old snapshot              Claude extracts              │
 │  → skills/handshake/               17 sections from            │
-│    backups/<timestamp>.md          conversation context         │
+│    backups/&lt;timestamp&gt;.md          conversation context         │
 │                                                │               │
 │                                                ▼               │
 │                             Write handshake.md (≤250 lines)    │
@@ -115,13 +116,14 @@ That's **context rot** — the silent productivity tax of AI coding workflows.
 │  Read handshake.md                 Parse all 17 sections        │
 │                                                │               │
 │                                                ▼               │
-│                             "Restored from <timestamp>.         │
-│                              Next: <Step 1>. Ready?"            │
+│                             "Restored from &lt;timestamp&gt;.         │
+│                              Next: &lt;Step 1&gt;. Ready?"            │
 │                                                │               │
 │                                                ▼               │
 │                       ✅ Session continues. Zero context lost.  │
 └─────────────────────────────────────────────────────────────────┘
-```
+</pre>
+</div>
 
 ### File Architecture
 
