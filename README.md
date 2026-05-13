@@ -73,55 +73,32 @@ That's **context rot** — the silent productivity tax of AI coding workflows.
 
 ## How It Works
 
-```
-┌─────────────────────────────────────────────────────────────────┐
-│                      WORKING SESSION                            │
-│                                                                 │
-│   Context reaches ~60%                                          │
-│            │                                                    │
-│            ▼                                                    │
-│       /handshake  (SAVE)                                        │
-│            │                                                    │
-│     ┌──────┴──────────────────────┐                             │
-│     ▼                             ▼                             │
-│  Archive old snapshot       Claude extracts                     │
-│  → skills/handshake/        17 sections from                    │
-│    backups/<timestamp>.md   conversation context                │
-│                                   │                             │
-│                                   ▼                             │
-│                       Write handshake.md (≤250 lines)           │
-│                                   │                             │
-│                                   ▼                             │
-│                    "Safe to /clear"                             │
-└─────────────────────────────────────────────────────────────────┘
-                               │
-                           /clear
-                               │
-                               ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                      CONTEXT WIPED                              │
-│  CLAUDE.md · settings.json · hooks · plugins — reload          │
-│  Conversation — gone. That's the point.                         │
-└─────────────────────────────────────────────────────────────────┘
-                               │
-                               ▼
-┌─────────────────────────────────────────────────────────────────┐
-│                      FRESH SESSION                              │
-│                                                                 │
-│       /handshake upload  (RESTORE)                              │
-│            │                                                    │
-│     ┌──────┴──────────────────────┐                             │
-│     ▼                             ▼                             │
-│  Read handshake.md          Parse all 17 sections               │
-│                                   │                             │
-│                                   ▼                             │
-│  "Restored from <timestamp>.                                    │
-│   Next: <Step 1 from your saved Next Steps>.                    │
-│   Ready to continue?"                                           │
-│                                   │                             │
-│                                   ▼                             │
-│              Session continues. Zero context lost.              │
-└─────────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    subgraph SAVE ["💾 Working Session"]
+        A(["🟡 Context reaches ~70%"]) --> B["/handshake — SAVE"]
+        B --> C["Archive old snapshot<br/>→ backups/timestamp.md"]
+        B --> D["Claude extracts<br/>17 sections"]
+        D --> E["Write handshake.md<br/>≤250 lines"]
+        E --> F(["✅ Safe to /clear"])
+    end
+
+    subgraph WIPE ["🔴 Context Wiped"]
+        G["/clear"]
+        H["CLAUDE.md · settings · hooks — reload<br/>Conversation — gone. That's the point."]
+        G --> H
+    end
+
+    subgraph RESTORE ["🟢 Fresh Session"]
+        I["/handshake upload — RESTORE"]
+        I --> J["Read handshake.md"]
+        I --> K["Parse all 17 sections"]
+        K --> L["Restored from timestamp.<br/>Next: Step 1. Ready?"]
+        L --> M(["✅ Zero context lost."])
+    end
+
+    F --> G
+    H --> I
 ```
 
 ### File Architecture
