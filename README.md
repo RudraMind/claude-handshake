@@ -57,7 +57,7 @@ That's **context rot** — the silent productivity tax of AI coding workflows.
 
 ## Before vs After claude-handshake
 
-| | Without claude-handshake<br><span style="color:red">`/compact`</span> | With claude-handshake<br><span style="color:green">`/handshake`</span> |
+| | Without claude-handshake<br>🔴 `/compact` | With claude-handshake<br>🟢 `/handshake` |
 |---|---|---|
 | When context fills | `/compact` auto-fires — you don't choose | You snapshot when *you* decide |
 | Summarization | Auto-compressed by Claude Code | YOU control 17 explicit sections |
