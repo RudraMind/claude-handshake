@@ -18,7 +18,7 @@
 
 <p align="center">
   <a href="#the-problem">Problem</a> •
-  <a href="#install">Install</a> •
+  <a href="#install-claude-code">Install</a> •
   <a href="#how-it-works">How It Works</a> •
   <a href="#usage">Usage</a> •
   <a href="#what-gets-saved">What Gets Saved</a> •
