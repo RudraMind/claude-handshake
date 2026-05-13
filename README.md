@@ -180,7 +180,7 @@ New session.
 **Never restart from zero again.**
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/rudrafuture/claude-handshake/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/rudrafuture/claude-handshake/master/install.sh | bash
 ```
 
 Restart Claude Code. Done.
@@ -188,7 +188,7 @@ Restart Claude Code. Done.
 **Manual install:**
 ```bash
 mkdir -p ~/.claude/skills/handshake
-curl -fsSL https://raw.githubusercontent.com/rudrafuture/claude-handshake/main/SKILL.md \
+curl -fsSL https://raw.githubusercontent.com/rudrafuture/claude-handshake/master/SKILL.md \
   -o ~/.claude/skills/handshake/SKILL.md
 ```
 
