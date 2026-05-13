@@ -5,7 +5,7 @@
 <h1 align="center">claude-handshake</h1>
 
 <p align="center">
-  <strong>context dies every session. this is the cure.</strong>
+  <strong>Handshake before the blackout.</strong>
 </p>
 
 <p align="center">
@@ -47,7 +47,7 @@ Until now.
 
 ---
 
-## Three Commands. Full Continuity.
+## Snapshot. Reset. Resume.
 
 ```
 /handshake          ← snapshot everything Claude knows right now
@@ -177,6 +177,8 @@ New session.
 
 ## Install
 
+**Never restart from zero again.**
+
 ```bash
 curl -fsSL https://raw.githubusercontent.com/rudrafuture/claude-handshake/main/install.sh | bash
 ```
@@ -194,7 +196,7 @@ curl -fsSL https://raw.githubusercontent.com/rudrafuture/claude-handshake/main/S
 
 ## Usage
 
-**Step 1 — Context hits ~60%. Run:**
+**Step 1 — Save the vibe before the wipe:**
 ```
 /handshake
 ```
