@@ -141,11 +141,14 @@ That's **context rot** — the silent productivity tax of AI coding workflows.
 
 **No database. No daemon. No background process. One skill file.**
 
-> **Bonus:** Every save auto-archives to `backups/`. Restore any past session:
+> 🎁 **Bonus Skill — Time Travel:**
+> Every `/handshake` save auto-archives to `backups/`. Missed something from 3 days ago? Run `/handshake upload`, provide the backup filename, and Claude resurrects that exact session — decisions, failures, voice note and all.
 > ```
 > /handshake upload
+> → "No handshake.md found. Provide path or filename from backups/?"
+> → handshake_2026-05-10_143201.md
+> → Restored. Ready to continue?
 > ```
-> When prompted, provide the backup filename — e.g. `handshake_2026-05-11_143201.md` — to resume from any point in history.
 
 ---
 
