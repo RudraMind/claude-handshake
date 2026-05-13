@@ -77,22 +77,22 @@ That's **context rot** — the silent productivity tax of AI coding workflows.
 ┌─────────────────────────────────────────────────────────────────┐
 │                      WORKING SESSION                            │
 │                                                                 │
-│   Context reaches ~60%                                          │
-│            │                                                    │
-│            ▼                                                    │
-│       /handshake  (SAVE)                                        │
-│            │                                                    │
-│     ┌──────┴──────────────────────┐                             │
-│     ▼                             ▼                             │
-│  Archive old snapshot       Claude extracts                     │
-│  → skills/handshake/        17 sections from                    │
-│    backups/<timestamp>.md   conversation context                │
-│                                   │                             │
-│                                   ▼                             │
-│                       Write handshake.md (≤250 lines)           │
-│                                   │                             │
-│                                   ▼                             │
-│                    "Safe to /clear"                             │
+│                   Context reaches ~70%                          │
+│                            │                                    │
+│                            ▼                                    │
+│                   /handshake  (SAVE)                            │
+│                            │                                    │
+│            ┌───────────────┴───────────────────┐               │
+│            ▼                                   ▼               │
+│  Archive old snapshot              Claude extracts              │
+│  → skills/handshake/               17 sections from            │
+│    backups/<timestamp>.md          conversation context         │
+│                                                │               │
+│                                                ▼               │
+│                             Write handshake.md (≤250 lines)    │
+│                                                │               │
+│                                                ▼               │
+│                                   ✅ "Safe to /clear"           │
 └─────────────────────────────────────────────────────────────────┘
                                │
                            /clear
