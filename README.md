@@ -140,7 +140,7 @@ That's **context rot** — the silent productivity tax of AI coding workflows.
 
 ---
 
-## Install
+## Install (Claude Code)
 
 **Never restart from zero again.**
 
