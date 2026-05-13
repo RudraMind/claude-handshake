@@ -127,17 +127,25 @@ That's **context rot** — the silent productivity tax of AI coding workflows.
 
 ### File Architecture
 
-```
+<div align="center">
+<pre>
 ~/.claude/
 ├── handshake.md                      ← active snapshot (≤250 lines)
 └── skills/
     └── handshake/                    ← everything in ONE place
         ├── SKILL.md                  ← skill Claude reads
         └── backups/
-            └── handshake_<TS>.md    ← auto-archived on every save
-```
+            └── handshake_&lt;TS&gt;.md    ← auto-archived on every save
+</pre>
+</div>
 
 **No database. No daemon. No background process. One skill file.**
+
+> **Bonus:** Every save auto-archives to `backups/`. Restore any past session:
+> ```
+> /handshake upload
+> ```
+> When prompted, provide the backup filename — e.g. `handshake_2026-05-11_143201.md` — to resume from any point in history.
 
 ---
 
@@ -232,6 +240,14 @@ Use **claude-keepalive** for zero manual steps on Unix/WSL.
 
 ### v1.0 — Manual Control ✅ (current)
 Three commands. Full continuity. Zero deps. Works everywhere.
+
+### v1.1 — Time Travel (coming)
+
+```
+/handshake upload backups/handshake_2026-05-10_143201.md
+```
+
+Restore from any archived snapshot — not just the latest. Every `/handshake` save auto-archives. Pick any point in your history and resume from there.
 
 ### v2.0 — Fully Automated (coming)
 
