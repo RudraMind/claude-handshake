@@ -108,19 +108,18 @@ That's **context rot** — the silent productivity tax of AI coding workflows.
 ┌─────────────────────────────────────────────────────────────────┐
 │                      FRESH SESSION                              │
 │                                                                 │
-│       /handshake upload  (RESTORE)                              │
-│            │                                                    │
-│     ┌──────┴──────────────────────┐                             │
-│     ▼                             ▼                             │
-│  Read handshake.md          Parse all 17 sections               │
-│                                   │                             │
-│                                   ▼                             │
-│  "Restored from <timestamp>.                                    │
-│   Next: <Step 1 from your saved Next Steps>.                    │
-│   Ready to continue?"                                           │
-│                                   │                             │
-│                                   ▼                             │
-│              Session continues. Zero context lost.              │
+│                   /handshake upload  (RESTORE)                  │
+│                            │                                    │
+│            ┌───────────────┴───────────────────┐               │
+│            ▼                                   ▼               │
+│  Read handshake.md                 Parse all 17 sections        │
+│                                                │               │
+│                                                ▼               │
+│                             "Restored from <timestamp>.         │
+│                              Next: <Step 1>. Ready?"            │
+│                                                │               │
+│                                                ▼               │
+│                       ✅ Session continues. Zero context lost.  │
 └─────────────────────────────────────────────────────────────────┘
 ```
 
