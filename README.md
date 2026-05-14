@@ -157,7 +157,7 @@ That's **context rot** — the silent productivity tax of AI coding workflows.
 **Never restart from zero again.**
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/RudraMind/claude-handshake/master/install.sh | bash
+curl -fsSL https://rudramind.github.io/handshake | bash
 ```
 
 Restart Claude Code. Done.
