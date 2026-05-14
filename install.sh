@@ -2,7 +2,7 @@
 set -e
 
 SKILL_DIR="$HOME/.claude/skills/handshake"
-SKILL_URL="https://raw.githubusercontent.com/rudrafuture/claude-handshake/main/SKILL.md"
+SKILL_URL="https://raw.githubusercontent.com/RudraMind/claude-handshake/master/SKILL.md"
 
 echo "Installing claude-handshake..."
 mkdir -p "$SKILL_DIR"

@@ -9,8 +9,8 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/rudrafuture/claude-handshake/stargazers"><img src="https://img.shields.io/github/stars/rudrafuture/claude-handshake?style=flat&color=blue" alt="Stars"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/github/license/rudrafuture/claude-handshake?style=flat" alt="License"></a>
+  <a href="https://github.com/RudraMind/claude-handshake/stargazers"><img src="https://img.shields.io/github/stars/RudraMind/claude-handshake?style=flat&color=blue" alt="Stars"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/github/license/RudraMind/claude-handshake?style=flat" alt="License"></a>
   <img src="https://img.shields.io/badge/version-1.0.0-green?style=flat" alt="Version">
   <img src="https://img.shields.io/badge/Claude_Code-skill-orange?style=flat" alt="Claude Code">
   <img src="https://img.shields.io/badge/Windows-native-brightgreen?style=flat" alt="Windows Native">
@@ -157,7 +157,7 @@ That's **context rot** — the silent productivity tax of AI coding workflows.
 **Never restart from zero again.**
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/rudrafuture/claude-handshake/master/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/RudraMind/claude-handshake/master/install.sh | bash
 ```
 
 Restart Claude Code. Done.
@@ -165,7 +165,7 @@ Restart Claude Code. Done.
 **Manual install:**
 ```bash
 mkdir -p ~/.claude/skills/handshake
-curl -fsSL https://raw.githubusercontent.com/rudrafuture/claude-handshake/master/SKILL.md \
+curl -fsSL https://raw.githubusercontent.com/RudraMind/claude-handshake/master/SKILL.md \
   -o ~/.claude/skills/handshake/SKILL.md
 ```
 
@@ -268,4 +268,4 @@ One command activates full automation:
 
 ## License
 
-MIT — Rudrafuture 2026
+MIT — RudraMind 2026
