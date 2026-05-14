@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
 SKILL_DIR="$HOME/.claude/skills/handshake"
 SKILL_URL="https://raw.githubusercontent.com/RudraMind/claude-handshake/master/SKILL.md"
