@@ -1,0 +1,624 @@
+<title>Brentwood Brothers · Magic Notebook</title>
+<meta name="description" content="An illustrated flip-book: Brentwood Brothers, Vol. 1 — The Magic Notebook.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:ital,wght@0,500;0,700;0,800;1,600&display=swap">
+<style>
+  :root{
+    --cream:#FBF4E6; --ink:#2C2A4A; --sun:#F5B841; --leaf:#5FA35A;
+    --plum:#3D3568; --star:#FFE08A; --rose:#E67E6B; --sky:#BFE0EA;
+    --paper:#FFFDF7; --edge:#E7DCC4;
+    --bg:#F1E7D2; --bg2:#E7DAC0; --shadow:rgba(44,42,74,.22);
+    --btn:#2C2A4A; --btn-ink:#FBF4E6;
+    --muted:#6B6488;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#211F38; --bg2:#191730; --paper:#241F33; --cream:#F3ECDC;
+      --ink:#F3ECDC; --edge:#3A3452; --shadow:rgba(0,0,0,.5);
+      --btn:#F5B841; --btn-ink:#241326; --muted:#B3AAD0;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#211F38; --bg2:#191730; --paper:#241F33; --cream:#F3ECDC;
+    --ink:#F3ECDC; --edge:#3A3452; --shadow:rgba(0,0,0,.5);
+    --btn:#F5B841; --btn-ink:#241326; --muted:#B3AAD0;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; background:radial-gradient(120% 120% at 50% 0%, var(--bg) 0%, var(--bg2) 100%);
+    color:var(--ink); font-family:"Nunito",system-ui,sans-serif;
+    display:flex; flex-direction:column; align-items:center;
+    min-height:100%; padding:18px 14px 26px;
+  }
+  .kicker{font-family:"Fredoka",sans-serif; letter-spacing:.28em; text-transform:uppercase;
+    font-size:12px; color:var(--muted); font-weight:600; margin:2px 0 12px; text-align:center}
+  .stage{width:100%; max-width:660px; display:flex; flex-direction:column; align-items:center; gap:16px}
+  .book{
+    position:relative; width:100%; aspect-ratio:5/6.6; background:var(--paper);
+    border-radius:14px 20px 20px 14px;
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.5) inset,
+      -8px 0 0 -2px var(--edge),
+      -14px 0 0 -4px color-mix(in srgb, var(--edge) 70%, transparent),
+      0 22px 44px -14px var(--shadow);
+    overflow:hidden; display:flex; flex-direction:column;
+  }
+  .book::before{content:""; position:absolute; top:0; bottom:0; left:0; width:26px;
+    background:linear-gradient(90deg, rgba(44,42,74,.14), rgba(44,42,74,0)); pointer-events:none; z-index:3}
+  .leaf{position:absolute; inset:0; display:flex; flex-direction:column;
+    opacity:0; transform:translateX(14px) scale(.995); pointer-events:none;
+    transition:opacity .42s ease, transform .42s ease;}
+  .leaf.active{opacity:1; transform:none; pointer-events:auto}
+  @media (prefers-reduced-motion:reduce){.leaf{transition:none}}
+  .art{width:100%; flex:0 0 auto; line-height:0}
+  .art svg{width:100%; height:auto; display:block}
+  .text{flex:1 1 auto; padding:16px 26px 20px; display:flex; flex-direction:column;
+    justify-content:center; gap:9px; overflow:auto}
+  .pageno{font-family:"Fredoka",sans-serif; font-size:12px; letter-spacing:.14em;
+    color:var(--muted); text-transform:uppercase; font-weight:600}
+  .line{font-size:clamp(15px,2.9vw,19px); line-height:1.5; margin:0; max-width:46ch}
+  .line.big{font-family:"Fredoka",sans-serif; font-weight:600; font-size:clamp(19px,4vw,26px);
+    line-height:1.25; color:var(--plum)}
+  .spell{font-family:"Fredoka",sans-serif; font-weight:600; color:var(--rose);
+    letter-spacing:.06em; font-size:clamp(18px,3.6vw,24px)}
+  .shout{font-family:"Fredoka",sans-serif; font-weight:700; color:var(--sun);
+    font-size:clamp(26px,6vw,40px); letter-spacing:.04em; -webkit-text-stroke:1px var(--ink);
+    text-stroke:1px var(--ink)}
+  .say{font-style:italic; color:var(--plum); font-weight:600}
+  .end{font-family:"Fredoka",sans-serif; font-weight:700; letter-spacing:.3em;
+    color:var(--sun); font-size:clamp(22px,5vw,32px); text-align:center; margin-top:6px}
+
+  /* Cover */
+  .cover .text{display:none}
+  .cover .art{flex:1 1 auto; position:relative; line-height:0}
+  .cover .art svg{width:100%; height:100%; display:block}
+  .mono{position:absolute; inset:0; z-index:2}
+  .mono .top-kick{position:absolute; top:5%; left:0; right:0; text-align:center;
+    font-family:"Fredoka",sans-serif; color:var(--star); letter-spacing:.34em;
+    text-transform:uppercase; font-size:clamp(10px,2.2vw,13px); font-weight:500;
+    text-shadow:0 1px 6px rgba(20,15,40,.7)}
+  .lockup{position:absolute; top:30%; left:50%; transform:translateX(-50%);
+    display:grid; grid-template-columns:auto auto; grid-template-rows:auto auto;
+    column-gap:clamp(6px,1.6vw,12px); align-items:center;
+    filter:drop-shadow(0 6px 14px rgba(20,15,40,.55))}
+  .lockup .bigB{grid-row:1/3; grid-column:1; font-family:"Fredoka",sans-serif; font-weight:700;
+    font-size:clamp(120px,30vw,220px); line-height:.82; color:var(--star);
+    -webkit-text-stroke:clamp(2px,.7vw,4px) var(--ink); text-stroke:2px var(--ink)}
+  .lockup .word{font-family:"Fredoka",sans-serif; font-weight:600; color:#fff;
+    font-size:clamp(30px,8vw,58px); line-height:.9; letter-spacing:.01em;
+    -webkit-text-stroke:clamp(1px,.35vw,2px) var(--ink); text-stroke:1px var(--ink)}
+  .lockup .word.top{grid-row:1; grid-column:2; align-self:end}
+  .lockup .word.bot{grid-row:2; grid-column:2; align-self:start}
+  .vol{position:absolute; top:58%; left:50%; transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:9px; white-space:nowrap}
+  .vol .sub{font-family:"Fredoka",sans-serif; color:var(--star); font-size:clamp(11px,2.4vw,14px);
+    letter-spacing:.3em; text-transform:uppercase; font-weight:500; text-shadow:0 1px 8px rgba(20,15,40,.85)}
+  .vol .band{font-family:"Fredoka",sans-serif; font-weight:600; color:var(--ink);
+    background:var(--star); padding:7px 22px; border-radius:999px; font-size:clamp(16px,3.6vw,23px);
+    letter-spacing:.01em; box-shadow:0 5px 16px rgba(20,15,40,.45)}
+
+  /* Controls */
+  .controls{display:flex; align-items:center; gap:14px; user-select:none}
+  .nav{font-family:"Fredoka",sans-serif; font-weight:600; font-size:15px; cursor:pointer;
+    border:none; background:var(--btn); color:var(--btn-ink); padding:11px 20px;
+    border-radius:999px; display:inline-flex; align-items:center; gap:8px;
+    box-shadow:0 6px 16px -6px var(--shadow); transition:transform .12s ease, opacity .2s}
+  .nav:hover{transform:translateY(-1px)}
+  .nav:active{transform:translateY(0)}
+  .nav:disabled{opacity:.35; cursor:default; transform:none}
+  .nav:focus-visible{outline:3px solid var(--sun); outline-offset:2px}
+  .counter{font-family:"Fredoka",sans-serif; font-weight:600; color:var(--muted);
+    min-width:104px; text-align:center; font-size:14px; letter-spacing:.04em}
+  .tap{position:absolute; top:0; bottom:0; width:34%; z-index:4; cursor:pointer; background:transparent; border:none}
+  .tap.left{left:0} .tap.right{right:0}
+  .tap:focus-visible{outline:2px solid var(--sun); outline-offset:-4px}
+  .hint{font-size:12px; color:var(--muted); text-align:center; font-family:"Fredoka",sans-serif; letter-spacing:.03em}
+
+  /* ---- Print / PDF: one leaf per page ---- */
+  @media print{
+    @page{ size:150mm 198mm; margin:0; }
+    html,body{ background:#fff; }
+    body{ display:block; padding:0; }
+    .kicker,.controls,.hint,.tap{ display:none !important; }
+    .stage{ max-width:none; width:auto; gap:0; }
+    .book{ width:150mm; height:auto; aspect-ratio:auto; border-radius:0;
+      box-shadow:none; overflow:visible; }
+    .book::before{ display:none; }
+    .leaf{ position:relative; inset:auto; opacity:1 !important; transform:none !important;
+      pointer-events:auto; height:198mm; break-after:page; page-break-after:always;
+      overflow:hidden; border-bottom:1px solid #eee; }
+    .leaf:last-child{ break-after:auto; page-break-after:auto; }
+    .cover .art{ height:198mm; }
+    .art,.art svg{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  }
+</style>
+
+<p class="kicker">A Brentwood Brothers Picture Book</p>
+<div class="stage">
+  <div class="book" id="book" aria-label="Story book" role="group"></div>
+  <div class="controls">
+    <button class="nav" id="prev" aria-label="Previous page">‹ Back</button>
+    <span class="counter" id="counter"></span>
+    <button class="nav" id="next" aria-label="Next page">Next ›</button>
+  </div>
+  <p class="hint">Use the arrows, the ← → keys, or tap the sides of the page.</p>
+</div>
+
+<script>
+/* ---------- palette ---------- */
+const C = {
+  cream:"#FBF4E6", ink:"#2C2A4A", sun:"#F5B841", leaf:"#5FA35A", darkleaf:"#4A8148",
+  plum:"#3D3568", star:"#FFE08A", rose:"#E67E6B", sky:"#BFE0EA", nightsky:"#2A2650",
+  skin:"#E8B98A", skin2:"#D9A876", hair:"#2A2320", kurtaB:"#3F72AF", kurtaBd:"#345F92",
+  kurtaS:"#F1863C", kurtaSd:"#D96E29", churidar:"#F3ECD9", trunk:"#7A5A3A", grass:"#6FB05C",
+  lemon:"#F4D03F", cloud:"#FBFBFF", fog:"#Dfe4ea", rock:"#9AA0A8", rockD:"#7C828B",
+  house:"#E8Cda0", roof:"#B5654A", glass:"#FCE9A8"
+};
+
+/* ---------- character ---------- */
+/* feet-centre at (cx,cy); builds upward. */
+function boy(cx, cy, s, o){
+  o = o || {};
+  const kurta = o.kurta || C.kurtaB, kurtaD = o.kurtaD || C.kurtaBd;
+  const face = o.face || "happy";
+  const glasses = o.glasses;
+  const pose = o.pose || "down";
+  // hand targets (local coords, feet at 0, up = negative)
+  let lH=[-27,-54], rH=[27,-54];               // down
+  if(pose==="up"){ lH=[-30,-148]; rH=[30,-148]; }
+  if(pose==="cheer"){ lH=[-34,-150]; rH=[34,-150]; }
+  if(pose==="cross"){ lH=[14,-74]; rH=[-14,-74]; }
+  if(pose==="pointUp"){ lH=[-27,-54]; rH=[26,-152]; }
+  if(pose==="hold"){ lH=[-13,-96]; rH=[13,-96]; }
+  if(pose==="sit"){ lH=[-24,-64]; rH=[24,-64]; }
+  const legY = pose==="sit" ? -30 : 0;         // sitting: shorter legs, drawn forward
+  const eyes = {
+    happy:`<circle cx="-7" cy="-120" r="2.6" fill="${C.ink}"/><circle cx="7" cy="-120" r="2.6" fill="${C.ink}"/>`,
+    amazed:`<circle cx="-7" cy="-121" r="3.4" fill="#fff" stroke="${C.ink}" stroke-width="1.4"/><circle cx="7" cy="-121" r="3.4" fill="#fff" stroke="${C.ink}" stroke-width="1.4"/><circle cx="-7" cy="-121" r="1.7" fill="${C.ink}"/><circle cx="7" cy="-121" r="1.7" fill="${C.ink}"/>`,
+    glare:`<path d="M-12 -125 L-3 -122" stroke="${C.ink}" stroke-width="2.4" fill="none" stroke-linecap="round"/><path d="M12 -125 L3 -122" stroke="${C.ink}" stroke-width="2.4" fill="none" stroke-linecap="round"/><circle cx="-7" cy="-119" r="2.4" fill="${C.ink}"/><circle cx="7" cy="-119" r="2.4" fill="${C.ink}"/>`,
+    soft:`<path d="M-10 -120 q3 -3 6 0" stroke="${C.ink}" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M4 -120 q3 -3 6 0" stroke="${C.ink}" stroke-width="2.2" fill="none" stroke-linecap="round"/>`,
+    proud:`<path d="M-11 -121 q4 -4 8 0" stroke="${C.ink}" stroke-width="2.2" fill="none" stroke-linecap="round"/><path d="M3 -121 q4 -4 8 0" stroke="${C.ink}" stroke-width="2.2" fill="none" stroke-linecap="round"/>`
+  }[face] || "";
+  const mouth = {
+    happy:`<path d="M-8 -110 q8 8 16 0" stroke="${C.ink}" stroke-width="2.4" fill="none" stroke-linecap="round"/>`,
+    amazed:`<ellipse cx="0" cy="-108" rx="5.5" ry="7" fill="${C.ink}"/>`,
+    glare:`<path d="M-7 -108 L7 -108" stroke="${C.ink}" stroke-width="2.4" fill="none" stroke-linecap="round"/>`,
+    soft:`<path d="M-7 -110 q7 5 14 0" stroke="${C.ink}" stroke-width="2.2" fill="none" stroke-linecap="round"/>`,
+    proud:`<path d="M-8 -110 q8 7 16 0" stroke="${C.ink}" stroke-width="2.4" fill="none" stroke-linecap="round"/>`
+  }[face] || "";
+  const gl = glasses ? `
+    <circle cx="-7" cy="-120" r="7.5" fill="none" stroke="${C.ink}" stroke-width="1.8"/>
+    <circle cx="7" cy="-120" r="7.5" fill="none" stroke="${C.ink}" stroke-width="1.8"/>
+    <path d="M-0.5 -121 h1.6 M-14.5 -121 h-4 M14.5 -121 h4" stroke="${C.ink}" stroke-width="1.8" stroke-linecap="round"/>` : "";
+  const hand = (x,y)=>`<circle cx="${x}" cy="${y}" r="6" fill="${C.skin}"/>`;
+  return `<g transform="translate(${cx} ${cy}) scale(${s})">
+    <!-- legs -->
+    <line x1="-9" y1="-44" x2="-13" y2="${legY-2}" stroke="${C.churidar}" stroke-width="15" stroke-linecap="round"/>
+    <line x1="9" y1="-44" x2="13" y2="${legY-2}" stroke="${C.churidar}" stroke-width="15" stroke-linecap="round"/>
+    <ellipse cx="-13" cy="${legY}" rx="9" ry="5" fill="${C.ink}"/>
+    <ellipse cx="13" cy="${legY}" rx="9" ry="5" fill="${C.ink}"/>
+    <!-- arms behind body -->
+    <line x1="-18" y1="-88" x2="${lH[0]}" y2="${lH[1]}" stroke="${kurta}" stroke-width="13" stroke-linecap="round"/>
+    <line x1="18" y1="-88" x2="${rH[0]}" y2="${rH[1]}" stroke="${kurta}" stroke-width="13" stroke-linecap="round"/>
+    ${hand(lH[0],lH[1])}${hand(rH[0],rH[1])}
+    <!-- kurta body -->
+    <path d="M-20 -92 Q0 -100 20 -92 L29 -44 Q0 -34 -29 -44 Z" fill="${kurta}"/>
+    <path d="M-29 -44 Q0 -34 29 -44 L27 -49 Q0 -40 -27 -49 Z" fill="${kurtaD}"/>
+    <path d="M0 -92 L-6 -78 M0 -92 L6 -78" stroke="${kurtaD}" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    <!-- neck + head -->
+    <rect x="-6" y="-104" width="12" height="14" rx="5" fill="${C.skin2}"/>
+    <circle cx="0" cy="-120" r="20" fill="${C.skin}"/>
+    <path d="M-20 -122 Q-20 -145 0 -145 Q20 -145 20 -122 Q14 -134 0 -134 Q-8 -134 -14 -128 Q-18 -126 -20 -122 Z" fill="${C.hair}"/>
+    <circle cx="-13" cy="-114" r="3" fill="${C.rose}" opacity=".5"/>
+    <circle cx="13" cy="-114" r="3" fill="${C.rose}" opacity=".5"/>
+    ${eyes}${gl}${mouth}
+  </g>`;
+}
+
+/* ---------- shared props ---------- */
+function star(x,y,r,fill){
+  let p="", n=5;
+  for(let i=0;i<n*2;i++){
+    const rad=i%2?r*.44:r, a=(Math.PI/n)*i - Math.PI/2;
+    p += (i?"L":"M")+(x+Math.cos(a)*rad).toFixed(1)+" "+(y+Math.sin(a)*rad).toFixed(1)+" ";
+  }
+  return `<path d="${p}Z" fill="${fill||C.star}"/>`;
+}
+function twinkles(spec){ return spec.map(([x,y,r])=>star(x,y,r,C.star)).join(""); }
+function lemonTree(x,y,sc){ sc=sc||1; return `<g transform="translate(${x} ${y}) scale(${sc})">
+  <path d="M-8 0 Q-14 -60 -4 -120 L4 -120 Q10 -60 8 0 Z" fill="${C.trunk}"/>
+  <path d="M-2 -70 Q-30 -80 -40 -108 M2 -80 Q28 -92 40 -116" stroke="${C.trunk}" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <ellipse cx="-8" cy="-150" rx="62" ry="52" fill="${C.darkleaf}"/>
+  <ellipse cx="30" cy="-132" rx="48" ry="42" fill="${C.leaf}"/>
+  <ellipse cx="-30" cy="-124" rx="40" ry="36" fill="${C.leaf}"/>
+  <circle cx="-30" cy="-160" r="7" fill="${C.lemon}"/><circle cx="18" cy="-172" r="7" fill="${C.lemon}"/>
+  <circle cx="42" cy="-128" r="7" fill="${C.lemon}"/><circle cx="-46" cy="-120" r="6" fill="${C.lemon}"/>
+  <circle cx="-2" cy="-118" r="6" fill="${C.lemon}"/>
+</g>`; }
+function cloud(x,y,sc,fill){ sc=sc||1; fill=fill||C.cloud; return `<g transform="translate(${x} ${y}) scale(${sc})">
+  <ellipse cx="0" cy="0" rx="46" ry="26" fill="${fill}"/>
+  <ellipse cx="-34" cy="6" rx="26" ry="18" fill="${fill}"/>
+  <ellipse cx="34" cy="6" rx="30" ry="20" fill="${fill}"/>
+  <ellipse cx="6" cy="-14" rx="26" ry="20" fill="${fill}"/></g>`; }
+
+const W=800,H=520;
+function frame(defs, body, bg){
+  return `<svg viewBox="0 0 ${W} ${H}" xmlns="http://www.w3.org/2000/svg" role="img">
+  <defs>${defs||""}</defs>
+  <rect width="${W}" height="${H}" fill="${bg||C.sky}"/>${body}</svg>`;
+}
+function grad(id, stops, x1,y1,x2,y2){
+  return `<linearGradient id="${id}" x1="${x1||0}" y1="${y1||0}" x2="${x2||0}" y2="${y2||1}">
+    ${stops.map(([o,c])=>`<stop offset="${o}" stop-color="${c}"/>`).join("")}</linearGradient>`;
+}
+
+/* ---------- scenes (one per page) ---------- */
+const S = {};
+
+// COVER — portrait dusk yard, house, lemon tree, both boys, glowing notebook
+S.cover = ()=>{
+  const CW=820, CH=1082;
+  return `<svg viewBox="0 0 ${CW} ${CH}" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="The Brentwood Brothers in their backyard at dusk with a glowing notebook">
+  <defs>${grad("cvsky",[["0","#2E2652"],["0.5","#6E4C8C"],["0.8","#C56B7A"],["1","#E58B6B"]])}</defs>
+  <rect width="${CW}" height="${CH}" fill="url(#cvsky)"/>
+  ${twinkles([[90,90,7],[200,60,5],[330,110,4],[520,70,5],[610,130,4],[700,80,6],[150,180,4],[430,150,4],[760,200,5]])}
+  <circle cx="660" cy="230" r="56" fill="${C.star}" opacity=".92"/>
+  <circle cx="660" cy="230" r="74" fill="${C.star}" opacity=".18"/>
+  <rect x="0" y="770" width="${CW}" height="312" fill="#4E6B3C"/>
+  <path d="M0 770 Q220 748 440 768 T820 762 L820 800 L0 800 Z" fill="#6FB05C"/>
+  <g transform="translate(150 770)">
+    <rect x="-78" y="-104" width="156" height="104" fill="${C.house}"/>
+    <path d="M-94 -104 L0 -164 L94 -104 Z" fill="${C.roof}"/>
+    <rect x="-52" y="-78" width="38" height="38" rx="3" fill="${C.glass}"/>
+    <rect x="16" y="-78" width="38" height="38" rx="3" fill="${C.glass}"/>
+    <rect x="-18" y="-50" width="36" height="50" rx="4" fill="${C.roof}"/>
+  </g>
+  ${lemonTree(688,792,1.12)}
+  ${boy(352,1024,1.32,{kurta:C.kurtaB,kurtaD:C.kurtaBd,glasses:true,face:"happy",pose:"down"})}
+  ${boy(474,1030,1.12,{kurta:C.kurtaS,kurtaD:C.kurtaSd,face:"happy",pose:"pointUp"})}
+  <g transform="translate(250 1000)">
+    <ellipse cx="0" cy="16" rx="56" ry="13" fill="${C.star}" opacity=".45"/>
+    <rect x="-32" y="-32" width="64" height="48" rx="5" fill="#C7503F"/>
+    <rect x="-32" y="-32" width="11" height="48" fill="#9A3A2D"/>
+    <rect x="-17" y="-24" width="43" height="31" rx="2" fill="${C.cream}"/>
+    ${star(6,-8,10,C.sun)}
+  </g></svg>`;
+};
+
+// P1 — both boys in front of house, matching kurtas
+S.p1 = ()=>frame(
+  grad("p1sky",[["0","#CDE7F0"],["1","#F3E4C4"]]),
+  `<rect width="${W}" height="${H}" fill="url(#p1sky)"/>
+   <circle cx="140" cy="90" r="40" fill="${C.sun}"/>
+   ${cloud(560,90,1)}${cloud(300,60,.7)}
+   <rect x="0" y="356" width="${W}" height="164" fill="#6FB05C"/>
+   <path d="M0 356 Q400 340 800 356 L800 380 L0 380 Z" fill="#7FBE68"/>
+   <g transform="translate(400 356)">
+     <rect x="-150" y="-150" width="300" height="150" fill="${C.house}"/>
+     <path d="M-176 -150 L0 -226 L176 -150 Z" fill="${C.roof}"/>
+     <rect x="-110" y="-116" width="56" height="56" rx="4" fill="${C.glass}"/>
+     <rect x="54" y="-116" width="56" height="56" rx="4" fill="${C.glass}"/>
+     <rect x="-30" y="-84" width="60" height="84" rx="6" fill="${C.roof}"/>
+     <circle cx="18" cy="-42" r="4" fill="${C.sun}"/>
+   </g>
+   ${boy(300,470,1.24,{kurta:C.kurtaB,kurtaD:C.kurtaBd,glasses:true,face:"happy"})}
+   ${boy(500,474,0.98,{kurta:C.kurtaS,kurtaD:C.kurtaSd,face:"happy"})}`,
+  C.sky);
+
+// P2 — split: Sujith with books / Saaho lifting watering can
+S.p2 = ()=>frame(
+  grad("p2a",[["0","#CFE8DF"],["1","#EAF3D9"]]),
+  `<rect width="${W}" height="${H}" fill="url(#p2a)"/>
+   <rect x="400" y="0" width="1" height="${H}" fill="#0000"/>
+   <path d="M400 40 L400 480" stroke="${C.edge||'#E7DCC4'}" stroke-width="3" stroke-dasharray="10 10" opacity=".5"/>
+   <rect x="0" y="380" width="${W}" height="140" fill="#7FBE68"/>
+   <!-- left: books -->
+   <g transform="translate(120 380)">
+     <rect x="-46" y="-30" width="92" height="12" rx="2" fill="${C.rose}"/>
+     <rect x="-40" y="-44" width="80" height="12" rx="2" fill="${C.kurtaB}"/>
+     <rect x="-48" y="-58" width="96" height="12" rx="2" fill="${C.sun}"/>
+     <rect x="-36" y="-72" width="72" height="12" rx="2" fill="${C.leaf}"/>
+   </g>
+   ${boy(230,470,1.08,{kurta:C.kurtaB,kurtaD:C.kurtaBd,glasses:true,face:"soft",pose:"hold"})}
+   <g transform="translate(214 372)"><rect x="-2" y="-8" width="40" height="30" rx="3" fill="${C.cream}" stroke="${C.ink}" stroke-width="1.6"/><path d="M18 -8 v30" stroke="${C.ink}" stroke-width="1.4"/><path d="M2 0 h12 M22 0 h12 M2 8 h12 M22 8 h12" stroke="${C.muted||'#6B6488'}" stroke-width="1.4"/></g>
+   <!-- right: watering can lift -->
+   ${boy(560,472,1.06,{kurta:C.kurtaS,kurtaD:C.kurtaSd,face:"proud",pose:"up"})}
+   <g transform="translate(560 300)">
+     <rect x="-34" y="0" width="68" height="42" rx="8" fill="${C.leaf}"/>
+     <path d="M34 8 q26 2 40 26" stroke="${C.leaf}" stroke-width="10" fill="none" stroke-linecap="round"/>
+     <path d="M74 34 l14 -6 -2 12 z" fill="${C.leaf}"/>
+     <path d="M-30 0 q30 -20 60 0" stroke="${C.darkleaf}" stroke-width="7" fill="none"/>
+   </g>`,
+  C.sky);
+
+// P3 — Sujith reading on patio, Saaho upside-down on grass
+S.p3 = ()=>frame(
+  grad("p3sky",[["0","#F5D9A8"],["1","#F1B98C"]]),
+  `<rect width="${W}" height="${H}" fill="url(#p3sky)"/>
+   ${cloud(180,80,.8,'#FFF6E8')}${cloud(600,60,.6,'#FFF6E8')}
+   <rect x="0" y="360" width="${W}" height="160" fill="#6FB05C"/>
+   <rect x="0" y="330" width="360" height="40" fill="#D8C29A"/>
+   <rect x="0" y="360" width="360" height="14" fill="#C4Ad82"/>
+   ${boy(180,330,1.02,{kurta:C.kurtaB,kurtaD:C.kurtaBd,glasses:true,face:"soft",pose:"sit"})}
+   <g transform="translate(168 250)"><rect x="0" y="0" width="46" height="32" rx="3" fill="${C.cream}" stroke="${C.ink}" stroke-width="1.6"/><path d="M23 0 v32" stroke="${C.ink}" stroke-width="1.4"/></g>
+   <!-- Saaho upside down -->
+   <g transform="translate(580 470) rotate(180)">
+     ${boy(0,0,0.96,{kurta:C.kurtaS,kurtaD:C.kurtaSd,face:"happy",pose:"cheer"})}
+   </g>
+   <path d="M470 452 q10 8 20 0" stroke="${C.ink}" stroke-width="2" fill="none" opacity=".4"/>`,
+  C.sky);
+
+// P4 — Saaho holds up glowing notebook under lemon tree, gold dusk
+S.p4 = ()=>frame(
+  grad("p4sky",[["0","#F6C15E"],["0.6","#EF9E52"],["1","#D9743F"]]),
+  `<rect width="${W}" height="${H}" fill="url(#p4sky)"/>
+   <circle cx="640" cy="120" r="70" fill="#FFE7A6" opacity=".9"/>
+   <rect x="0" y="382" width="${W}" height="138" fill="#5E8446"/>
+   <path d="M0 382 Q400 366 800 382 L800 400 L0 400 Z" fill="#6FA152"/>
+   ${lemonTree(180,398,1.15)}
+   ${boy(470,474,1.12,{kurta:C.kurtaS,kurtaD:C.kurtaSd,face:"amazed",pose:"up"})}
+   <g transform="translate(470 300)">
+     <ellipse cx="0" cy="0" rx="70" ry="46" fill="${C.star}" opacity=".35"/>
+     <rect x="-34" y="-26" width="68" height="50" rx="6" fill="#C7503F"/>
+     <rect x="-34" y="-26" width="12" height="50" fill="#9A3A2D"/>
+     <rect x="-18" y="-16" width="46" height="32" rx="2" fill="${C.cream}"/>
+     ${star(4,0,11,C.sun)}
+     ${twinkles([[-54,-30,6],[52,-36,6],[0,-52,5]])}
+   </g>`,
+  C.sky);
+
+// P5 — close-up open notebook + pencil writing "a cloud slide"
+S.p5 = ()=>frame(
+  grad("p5bg",[["0","#EFE6CF"],["1","#DccBA6"]]),
+  `<rect width="${W}" height="${H}" fill="url(#p5bg)"/>
+   <g transform="translate(400 270) rotate(-4)">
+     <rect x="-300" y="-170" width="600" height="360" rx="14" fill="#C7503F"/>
+     <rect x="-286" y="-156" width="572" height="332" rx="8" fill="${C.paper||'#FFFDF7'}"/>
+     <line x1="0" y1="-156" x2="0" y2="176" stroke="#E7DcC4" stroke-width="3"/>
+     ${[...Array(6)].map((_,i)=>`<line x1="-260" y1="${-90+i*44}" x2="-30" y2="${-90+i*44}" stroke="#E7DcC4" stroke-width="2"/>`).join("")}
+     <text x="-256" y="-118" font-family="Fredoka, sans-serif" font-size="30" fill="${C.ink}" font-weight="600">What you write here,</text>
+     <text x="-256" y="-70" font-family="Fredoka, sans-serif" font-size="30" fill="${C.ink}" font-weight="600">the yard will build.</text>
+     <text x="40" y="0" font-family="Fredoka, sans-serif" font-size="40" fill="${C.rose}" font-weight="600" font-style="italic">a cloud</text>
+     <text x="40" y="52" font-family="Fredoka, sans-serif" font-size="40" fill="${C.rose}" font-weight="600" font-style="italic">slide</text>
+   </g>
+   <!-- pencil -->
+   <g transform="translate(560 300) rotate(52)">
+     <rect x="-10" y="-150" width="20" height="150" fill="${C.sun}"/>
+     <rect x="-10" y="-166" width="20" height="16" fill="${C.rose}"/>
+     <path d="M-10 0 L10 0 L0 26 Z" fill="#E8C79A"/>
+     <path d="M-4 12 L4 12 L0 26 Z" fill="${C.ink}"/>
+   </g>`,
+  C.cream);
+
+// P6 — cloud slide spiralling from sky, both boys sliding
+S.p6 = ()=>frame(
+  grad("p6sky",[["0","#B9DCEB"],["1","#E9F2DC"]]),
+  `<rect width="${W}" height="${H}" fill="url(#p6sky)"/>
+   ${twinkles([[60,60,4],[720,50,4]])}
+   <path d="M700 20 C560 60 640 170 480 210 C330 246 430 350 300 400 C240 424 170 440 120 470"
+      fill="none" stroke="${C.cloud}" stroke-width="56" stroke-linecap="round" opacity=".96"/>
+   <path d="M700 20 C560 60 640 170 480 210 C330 246 430 350 300 400 C240 424 170 440 120 470"
+      fill="none" stroke="#EAF0FA" stroke-width="30" stroke-linecap="round"/>
+   ${cloud(700,26,.7)}${cloud(150,470,.8)}
+   <rect x="0" y="454" width="${W}" height="66" fill="#7FBE68"/>
+   ${boy(470,232,0.78,{kurta:C.kurtaB,kurtaD:C.kurtaBd,glasses:true,face:"amazed",pose:"cheer"})}
+   ${boy(300,410,0.9,{kurta:C.kurtaS,kurtaD:C.kurtaSd,face:"happy",pose:"cheer"})}`,
+  C.sky);
+
+// P7 — Saaho's page of proud scribbles, empty yard behind
+S.p7 = ()=>frame(
+  grad("p7sky",[["0","#DCEBF2"],["1","#EEF3DD"]]),
+  `<rect width="${W}" height="${H}" fill="url(#p7sky)"/>
+   <rect x="0" y="372" width="${W}" height="148" fill="#7FBE68"/>
+   <path d="M0 372 Q400 360 800 372 L800 388 L0 388 Z" fill="#8CC87A"/>
+   ${lemonTree(700,388,.8)}
+   ${boy(250,472,1.06,{kurta:C.kurtaS,kurtaD:C.kurtaSd,face:"proud",pose:"hold"})}
+   <g transform="translate(250 360) rotate(-3)">
+     <rect x="-70" y="-64" width="150" height="104" rx="6" fill="#C7503F"/>
+     <rect x="-60" y="-56" width="132" height="90" rx="3" fill="${C.cream}"/>
+     <path d="M-48 -30 q20 -22 40 0 t40 0 M-46 6 l18 20 18 -22 18 22 M-40 -12 l70 40" stroke="${C.ink}" stroke-width="3" fill="none" stroke-linecap="round"/>
+     <path d="M20 -40 l16 20 -32 0 z" fill="none" stroke="${C.ink}" stroke-width="3"/>
+   </g>`,
+  C.sky);
+
+// P8 — thick fog, two silhouettes, only hands visible
+S.p8 = ()=>frame(
+  grad("p8bg",[["0","#E3E8EE"],["1","#CBD3DC"]]),
+  `<rect width="${W}" height="${H}" fill="url(#p8bg)"/>
+   <g opacity=".35">${boy(300,470,1.1,{kurta:"#AEB6C0",kurtaD:"#9AA3AE",glasses:true,face:"soft"})}</g>
+   <g opacity=".35">${boy(500,472,0.95,{kurta:"#AEB6C0",kurtaD:"#9AA3AE",face:"happy"})}</g>
+   ${[[.9,90,.7],[.8,220,.9],[.85,380,.7],[.75,560,1],[.8,700,.8],[.7,160,1.1],[.75,470,1.1]]
+     .map(([o,x,s])=>cloud(x,120+Math.random()*0,s,'#EDF1F6')).join("")}
+   ${cloud(140,260,1.1,'#F3F6FA')}${cloud(360,300,1.3,'#F3F6FA')}${cloud(600,270,1.2,'#F3F6FA')}
+   ${cloud(240,410,1.2,'#FBFCFE')}${cloud(520,430,1.3,'#FBFCFE')}${cloud(700,400,1,'#FBFCFE')}
+   <circle cx="272" cy="352" r="7" fill="${C.skin}"/><circle cx="330" cy="360" r="7" fill="${C.skin}"/>
+   <circle cx="470" cy="356" r="6.5" fill="${C.skin}"/><circle cx="528" cy="352" r="6.5" fill="${C.skin}"/>
+   <text x="400" y="120" text-anchor="middle" font-family="Fredoka, sans-serif" font-size="34" fill="#8A93A0" font-weight="600" opacity=".8">F O G</text>`,
+  "#DCE2E9");
+
+// P9 — giant boulder, Saaho glaring arms crossed, Sujith holding laugh
+S.p9 = ()=>frame(
+  grad("p9sky",[["0","#CFE7F0"],["1","#F0E7CE"]]),
+  `<rect width="${W}" height="${H}" fill="url(#p9sky)"/>
+   <rect x="0" y="378" width="${W}" height="142" fill="#7FBE68"/>
+   <path d="M0 378 Q400 366 800 378 L800 394 L0 394 Z" fill="#8CC87A"/>
+   <g transform="translate(430 378)">
+     <ellipse cx="0" cy="0" rx="150" ry="22" fill="#5C9A4C"/>
+     <path d="M-140 0 Q-160 -150 -40 -196 Q100 -230 150 -120 Q170 -30 140 0 Z" fill="${C.rock}"/>
+     <path d="M-140 0 Q-160 -150 -40 -196 Q20 -216 30 -160 Q-40 -150 -60 -80 Q-70 -30 -40 0 Z" fill="${C.rockD}" opacity=".5"/>
+     <path d="M40 -170 q30 20 40 60 M-20 -120 q20 10 20 40" stroke="${C.rockD}" stroke-width="3" fill="none" opacity=".6"/>
+   </g>
+   ${boy(220,474,1.06,{kurta:C.kurtaS,kurtaD:C.kurtaSd,face:"glare",pose:"cross"})}
+   ${boy(650,476,1.04,{kurta:C.kurtaB,kurtaD:C.kurtaBd,glasses:true,face:"happy",pose:"down"})}
+   <text x="650" y="300" text-anchor="middle" font-family="Fredoka, sans-serif" font-size="30" fill="${C.plum}" opacity=".55">hee hee</text>`,
+  C.sky);
+
+// P10 — two brothers sitting shoulder to shoulder, backs to us, sun down
+S.p10 = ()=>frame(
+  grad("p10sky",[["0","#6E4C8C"],["0.55","#E58B6B"],["1","#F6C15E"]]),
+  `<rect width="${W}" height="${H}" fill="url(#p10sky)"/>
+   <circle cx="400" cy="330" r="80" fill="#FFE7A6" opacity=".9"/>
+   ${twinkles([[80,60,5],[160,40,4],[700,70,5],[620,40,4]])}
+   <rect x="0" y="392" width="${W}" height="128" fill="#4E6B3C"/>
+   <path d="M0 392 Q400 378 800 392 L800 410 L0 410 Z" fill="#5E8446"/>
+   ${lemonTree(720,404,.8)}
+   <!-- backs of two boys sitting -->
+   <g transform="translate(350 392)">
+     <ellipse cx="0" cy="0" rx="46" ry="16" fill="#3F5A30"/>
+     <path d="M-42 0 Q-46 -70 0 -78 Q46 -70 42 0 Z" fill="${C.kurtaB}"/>
+     <circle cx="0" cy="-96" r="19" fill="${C.hair}"/>
+   </g>
+   <g transform="translate(452 396)">
+     <ellipse cx="0" cy="0" rx="40" ry="14" fill="#3F5A30"/>
+     <path d="M-36 0 Q-40 -58 0 -66 Q40 -58 36 0 Z" fill="${C.kurtaS}"/>
+     <circle cx="0" cy="-82" r="16" fill="${C.hair}"/>
+   </g>`,
+  C.nightsky);
+
+// P11 — close-up two hands on pencil, one small star rising, letter S
+S.p11 = ()=>frame(
+  grad("p11bg",[["0","#3A2E63"],["1","#7A5A9C"]]),
+  `<rect width="${W}" height="${H}" fill="url(#p11bg)"/>
+   ${twinkles([[120,60,4],[680,50,4],[560,90,3]])}
+   <!-- paper -->
+   <g transform="translate(400 350) rotate(-3)">
+     <rect x="-260" y="-120" width="520" height="240" rx="10" fill="${C.paper||'#FFFDF7'}"/>
+     ${[...Array(3)].map((_,i)=>`<line x1="-230" y1="${-40+i*50}" x2="230" y2="${-40+i*50}" stroke="#E7DcC4" stroke-width="2"/>`).join("")}
+     <text x="-150" y="20" font-family="Fredoka, sans-serif" font-size="120" fill="${C.rose}" font-weight="700">S</text>
+   </g>
+   <!-- rising star trail -->
+   <path d="M300 300 Q360 180 470 80" stroke="${C.star}" stroke-width="3" fill="none" stroke-dasharray="2 10" stroke-linecap="round" opacity=".8"/>
+   ${star(470,70,20,C.star)}
+   <circle cx="470" cy="70" r="34" fill="${C.star}" opacity=".25"/>
+   <!-- two hands on pencil -->
+   <g transform="translate(300 300) rotate(48)">
+     <rect x="-11" y="-190" width="22" height="190" fill="${C.sun}"/>
+     <rect x="-11" y="-208" width="22" height="18" fill="${C.rose}"/>
+     <path d="M-11 0 L11 0 L0 28 Z" fill="#E8C79A"/><path d="M-4 14 L4 14 L0 28 Z" fill="${C.ink}"/>
+   </g>
+   <ellipse cx="292" cy="316" rx="30" ry="22" fill="${C.skin}"/>
+   <ellipse cx="330" cy="300" rx="26" ry="19" fill="${C.skin2}"/>`,
+  C.nightsky);
+
+// P12 — Saaho hugging notebook, looking up at Sujith, first stars over yard
+S.p12 = ()=>frame(
+  grad("p12sky",[["0","#2E2A55"],["0.6","#6E4C8C"],["1","#E58B6B"]]),
+  `<rect width="${W}" height="${H}" fill="url(#p12sky)"/>
+   ${twinkles([[80,60,6],[200,40,4],[560,50,5],[680,90,4],[420,44,4],[720,44,5],[300,66,4]])}
+   <rect x="0" y="392" width="${W}" height="128" fill="#4E6B3C"/>
+   <path d="M0 392 Q400 378 800 392 L800 410 L0 410 Z" fill="#5E8446"/>
+   ${lemonTree(160,404,.95)}
+   ${boy(520,476,1.14,{kurta:C.kurtaB,kurtaD:C.kurtaBd,glasses:true,face:"soft",pose:"down"})}
+   ${boy(360,478,0.98,{kurta:C.kurtaS,kurtaD:C.kurtaSd,face:"proud",pose:"hold"})}
+   <g transform="translate(360 372)"><rect x="-24" y="-6" width="48" height="36" rx="4" fill="#C7503F"/><rect x="-16" y="0" width="34" height="24" rx="2" fill="${C.cream}"/></g>`,
+  C.nightsky);
+
+/* ---------- page data ---------- */
+const PAGES = [
+  { cover:true },
+  { n:1, art:S.p1, lines:[
+    {t:"In Brentwood, on a street with tall trees, there lived two brothers.",c:"big"},
+    {t:"Sujith was eight. Saaho was four."} ]},
+  { n:2, art:S.p2, lines:[
+    {t:"Sujith was the smartest kid on the block. He knew why the sky turned orange. He knew how many legs a spider had. He knew because he read."},
+    {t:"Saaho was the strongest kid on the block. He could carry the big watering can. He could push the swing so high it squeaked."} ]},
+  { n:3, art:S.p3, lines:[
+    {t:"Every evening the brothers ran to the backyard. Sujith brought a book. Saaho brought his hands."},
+    {t:"“Read with me,” said Sujith.",c:"say"},
+    {t:"“Books are boring,” said Saaho. “Books just sit there.”",c:"say"} ]},
+  { n:4, art:S.p4, lines:[
+    {t:"One evening, when the sun went low and turned the whole yard gold, Saaho found something under the lemon tree."},
+    {t:"A notebook. Small. Dusty. Warm, like it had been sitting in the sun all day."},
+    {t:"“SUJITH!”",c:"shout"} ]},
+  { n:5, art:S.p5, lines:[
+    {t:"Inside the front cover, one line was written:"},
+    {t:"What you write here, the yard will build.",c:"big"},
+    {t:"Sujith laughed. Then he picked up the pencil and wrote three careful words."},
+    {t:"a cloud slide",c:"spell"} ]},
+  { n:6, art:S.p6, lines:[
+    {t:"The air went soft. The grass went quiet."},
+    {t:"And a slide made of clouds came curling down out of the sky, right into the backyard."},
+    {t:"The brothers slid until their hair stood up."} ]},
+  { n:7, art:S.p7, lines:[
+    {t:"“My turn,” said Saaho.",c:"say"},
+    {t:"He grabbed the pencil. He pressed hard. He made loops and zigzags and one shape that was almost a triangle."},
+    {t:"Nothing happened. The yard stayed a yard."} ]},
+  { n:8, art:S.p8, lines:[
+    {t:"“Write letters,” said Sujith. “Real ones.”",c:"say"},
+    {t:"So Saaho tried. He wanted a fort. He wrote F O G."},
+    {t:"The whole backyard filled with fog. The brothers could not see their own feet."} ]},
+  { n:9, art:S.p9, lines:[
+    {t:"Saaho tried again. He wanted a rocket. He wrote R O C K."},
+    {t:"A rock appeared. A very large rock. It sat in the middle of the grass and did absolutely nothing."},
+    {t:"“That is the worst rocket ever,” said Saaho.",c:"say"} ]},
+  { n:10, art:S.p10, lines:[
+    {t:"Saaho put the notebook down. “I am the strongest kid,” he said quietly. “But I cannot make anything.”",c:"say"},
+    {t:"Sujith sat next to him on the grass."},
+    {t:"“You are the strongest kid. You are just not the strongest kid yet at this.”",c:"say"} ]},
+  { n:11, art:S.p11, lines:[
+    {t:"Sujith took his brother’s hand and moved it slowly across the page. One letter. Just one."},
+    {t:"S.  S for Saaho.",c:"big"},
+    {t:"A tiny star lifted off the paper and floated up over the fence, blinking."} ]},
+  { n:12, art:S.p12, lines:[
+    {t:"Saaho watched it go all the way up. Then he turned to his brother."},
+    {t:"“Teach me the next one.”",c:"say"},
+    {t:"THE END",c:"end"} ]}
+];
+
+/* ---------- render + navigation ---------- */
+const book = document.getElementById("book");
+const counter = document.getElementById("counter");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+let idx = 0;
+
+PAGES.forEach((p,i)=>{
+  const leaf = document.createElement("div");
+  leaf.className = "leaf" + (p.cover?" cover":"");
+  if(p.cover){
+    leaf.innerHTML = `<div class="art">${S.cover()}
+      <div class="mono">
+        <div class="top-kick">A Picture Book</div>
+        <div class="lockup" aria-label="Brentwood Brothers">
+          <div class="bigB" aria-hidden="true">B</div>
+          <div class="word top">rentwood</div>
+          <div class="word bot">rothers</div>
+        </div>
+        <div class="vol">
+          <div class="sub">Volume One</div>
+          <div class="band">The Magic Notebook</div>
+        </div>
+      </div></div>`;
+  } else {
+    const lines = p.lines.map(l=>`<p class="line ${l.c||""}">${l.t}</p>`).join("");
+    leaf.innerHTML = `<div class="art">${p.art()}</div>
+      <div class="text"><span class="pageno">Page ${p.n}</span>${lines}</div>`;
+  }
+  book.appendChild(leaf);
+});
+const leaves = [...book.querySelectorAll(".leaf")];
+
+// side tap zones
+const tapL = document.createElement("button"); tapL.className="tap left"; tapL.setAttribute("aria-label","Previous page");
+const tapR = document.createElement("button"); tapR.className="tap right"; tapR.setAttribute("aria-label","Next page");
+book.appendChild(tapL); book.appendChild(tapR);
+tapL.onclick=()=>go(idx-1); tapR.onclick=()=>go(idx+1);
+
+function go(i){
+  idx = Math.max(0, Math.min(PAGES.length-1, i));
+  leaves.forEach((l,k)=>l.classList.toggle("active", k===idx));
+  counter.textContent = idx===0 ? "Cover" : `Page ${idx} of ${PAGES.length-1}`;
+  prevBtn.disabled = idx===0;
+  nextBtn.disabled = idx===PAGES.length-1;
+  book.scrollTop = 0;
+}
+prevBtn.onclick=()=>go(idx-1);
+nextBtn.onclick=()=>go(idx+1);
+window.addEventListener("keydown",e=>{
+  if(e.key==="ArrowRight") go(idx+1);
+  else if(e.key==="ArrowLeft") go(idx-1);
+});
+go(0);
+</script>
